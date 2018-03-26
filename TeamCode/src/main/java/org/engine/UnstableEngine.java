@@ -1,5 +1,4 @@
 package org.engine;
-
 import android.util.Log;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
@@ -8,25 +7,13 @@ import java.util.ArrayList;
 
 /**
  * Created by t420 on 9/29/2016.
- * First sucess ful test was 5:00 6 thur oct 2016
+ * First successful test was 5:00pm thur oct 2016
  */
-/*
-
-::::::::: ::::::::::: :::        :::
-:+:    :+:    :+:     :+:        :+:
-+:+    +:+    +:+     +:+        +:+
-+#++:++#+     +#+     +#+        +#+
-+#+    +#+    +#+     +#+        +#+
-#+#    #+#    #+#     #+#        #+#
-######### ########### ########## ##########
-
- */
-
 
 public abstract class UnstableEngine extends OpMode {
 
     //changed robot prefs
-    public ArrayList<ArrayList<State>> processes = new ArrayList<>();
+    private ArrayList<ArrayList<State>> processes = new ArrayList<>();
     private ArrayList<Thread> threads = new ArrayList<>();
     private int threadX = 0;
 
@@ -35,7 +22,7 @@ public abstract class UnstableEngine extends OpMode {
     private int stateX = 0;
     private int stateY = 0;
 
-    public volatile double[][][] cache = new double[100][100][100];
+    private volatile double[][][] cache = new double[100][100][100];
 
 
     private static String TAG = "PROGRAM.ENGINE: ";

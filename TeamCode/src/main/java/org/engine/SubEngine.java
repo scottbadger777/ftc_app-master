@@ -1,72 +1,57 @@
 package org.engine;
-
 import android.util.Log;
 
-/**
- * Created by goldfishpi on 12/2/17.
- */
+/* Created on 12/2/17. */
 
 public abstract class SubEngine {
 
     private State[][] processes = new State[100][100];
     private Thread[] threads = new Thread[100];
-
     private SubEngine[] subEngines = new SubEngine[100];
-    int stateX = 0;
-    int stateY = 0;
-
-    int currentX = 0;
-    int currentY = 0;
 
     private boolean checkingStates = true;
-
     private boolean machineFinished = false;
     private boolean opFininished = true;
-
     private boolean isInitalized = false;
-
     private boolean runable = false;
-
     private boolean preInit= false;
-
-    public static String TAG = "PROGRAM.SUBENGINE.CLEAN";
-
-    boolean evaluated = false;
-
-    public abstract void setProcesses();
-
-    public abstract void evaluate();
-
     private String name = "";
 
+    private int stateX = 0;
+    private int stateY = 0;
+    private int currentX = 0;
+    private int currentY = 0;
+    public boolean evaluated = false;
+
+    public static String TAG = "PROGRAM.SUBENGINE.CLEAN";
+    public abstract void setProcesses();
+    public abstract void evaluate();
 
     public void checkStates(){
-
         //check to make sure the current state or whole machine isnt finished
         if (!opFininished && !machineFinished) {
-
             //Loop through to check if all sections of the current
             // state are finished, if so set opFinsished to true
             for (int y = 0; y < processes.length; y++) {
-
                 if (processes[currentX][y] != null) {
                     if (processes[currentX][y].getIsFinished()) {
                         opFininished = true;
                         Log.i(TAG, "FINISHED OP : " + "[" + Integer.toString(currentX) + "]" + "[" + Integer.toString(y) + "]");
-                    } else {
+                    }
+                    else {
                         opFininished = false;
                         break;
                     }
-                } else {
+                }
+                else {
                     break;
                 }
             }
             if (opFininished) {
                 currentX++;
             }
-
-
-        } else {
+        }
+        else {
             //If opmode is finished than set up the next set of processes or
             if (processes[currentX][0] != null) {
                 //set next state
@@ -77,16 +62,12 @@ public abstract class SubEngine {
                 }
                 opFininished = false;
                 Log.i(TAG, "Started State : " + Integer.toString(currentX));
-
-
-            }else if (processes[currentX][0] == null && !machineFinished) {
+            }
+            else if (processes[currentX][0] == null && !machineFinished) {
                 Log.i(TAG, "MACHINE TERMINATED");
                 machineFinished = true;
                 stop();
-            }else{
-
             }
-
         }
     }
 
@@ -110,7 +91,6 @@ public abstract class SubEngine {
                     Log.i(TAG,"KILLED OP AT : ["+x+"]"+"["+y+"]");
                 }
             }
-
         }
     }
 
